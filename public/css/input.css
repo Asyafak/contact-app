@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'inter', sans-serif;
+  @apply text-dark;
+}
+
+.hamburger-line {
+  @apply h-[2px] w-[30px] my-2 block bg-dark;
+}
+
+.nav-bar-active {
+  @apply scale-100;
+}
+
+.hamburger-active > span:nth-child(1) {
+  @apply rotate-45;
+}
+
+.hamburger-active > span:nth-child(2) {
+  @apply scale-0;
+}
+
+.hamburger-active > span:nth-child(3) {
+  @apply -rotate-45;
+}
+
+.contact-active {
+  @apply rounded-t-[2.3rem] rounded-b-[2.3rem];
+}
+
+.contact-active > div:last-child {
+  @apply scale-100 flex;
+}
+
+.detail-active {
+  @apply translate-x-0;
+}

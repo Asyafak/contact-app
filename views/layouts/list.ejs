@@ -1,0 +1,64 @@
+<section id="list" class="min-h-screen">
+  <div class="container">
+    <div class="px-4">
+       
+      <div id="a" class="flex w-full gap-4 items-center">
+        <h1 class="text-secondary uppercase">A</h1>
+        <span class="block w-full h-[2px] bg-secondary"></span>
+      </div>
+
+      <div class="grid grid-cols-1 mt-4 gap-4">
+
+        <!-- contact start -->
+        <div class="contact flex flex-wrap rounded-full shadow overflow-hidden cursor-pointer transition duration-300">
+          <div class="flex gap-4 w-full bg-slate-50 cursor-pointer">
+            <div class="photo h-20 w-24 rounded-full overflow-hidden border">
+              <img src="img/profile.png" alt="Photo Profile" class="">
+            </div>
+  
+            <div class="info justify-center flex flex-col w-full">
+              <h1 class="font-bold text-lg">Ahmad Syaeful Fakhruddin</h1>
+              <p class="font-extralight">083866956656</p>
+            </div>
+          </div>
+
+          <div class="hidden w-full text-center origin-top scale-0 transition duration-300">
+            <i id="star" class="fa-regular fa-star w-full bg-slate-50 cursor-pointer py-4 hover:text-primary hover:opacity-70"></i>
+            <i id="trash" class="fa-solid fa-trash w-full bg-slate-50 cursor-pointer py-4 hover:text-primary hover:opacity-70"></i>
+            <i id="info" class="fa-solid fa-info w-full bg-slate-50 cursor-pointer py-4 hover:text-primary hover:opacity-55 hover:border-2-dark"></i>
+          </div>
+        </div>
+        <!-- contact end -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const star = document.getElementById('star')
+  const trash = document.getElementById('trash')
+  const info = document.getElementById('info')
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const contacts = document.querySelectorAll('.contact');
+
+  document.body.addEventListener('click', (event) => {
+    // Cek apakah elemen yang diklik adalah child dari 'contact'
+    const contactElement = event.target.closest('.contact');
+    
+    if (contactElement) {
+      // Hapus kelas 'contact-active' dari semua elemen
+      contacts.forEach(ctc => ctc.classList.remove('contact-active'));
+
+      // Tambahkan kelas 'contact-active' ke elemen yang diklik
+      contactElement.classList.add('contact-active');
+    } else {
+      // Hapus kelas 'contact-active' jika mengklik di luar elemen 'contact'
+      contacts.forEach(ctc => ctc.classList.remove('contact-active'));
+    }
+  });
+});
+
+
+</script>
