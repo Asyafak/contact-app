@@ -3,12 +3,12 @@ const createInput = (type) => {
   newInput.classList.add('p-4', 'flex', 'gap-2', 'flex-wrap')
 
   const contactInput = `
-    <button type="button" data-type="${type}" class="plus flex w-full gap-4 cursor-pointer">
-      <h1 class="w-full border-b-2 border-secondary text-start text-secondary">${type}</h1>
-      <div class="flex justify-center items-center h-8 w-8 border rounded-full">
+    <div data-type="${type}" class="flex w-full gap-4">
+      <button type="button" class="plus w-full border-b-2 border-secondary text-start text-secondary cursor-pointer">${type}</h1>
+      <button type="button" class="plus flex justify-center items-center h-8 w-8 border rounded-full cursor-pointer">
         <i class="fa-solid fa-plus text-green-500"></i>
-      </div>
-    </button>
+      </button>
+    </div>
   `
   
   newInput.innerHTML = contactInput
@@ -74,24 +74,35 @@ const addDetail = (data) => {
 
 const addListDetail = (data) => {
   let result = `
-    <div class="absolute w-screen h-screen bg-white top-0 right-0 translate-x-full transition ease-in-out duration-300">
-      <div class="head px-4 flex w-full gap-4 items-center shadow">
-        <button type="button" class="back px-4 flex justify-center items-center cursor-pointer h-8 w-8 border rounded-full">
-          <i class="fa-solid fa-chevron-left text-primary"></i>
+    <div class="fixed w-screen h-screen bg-white top-0 right-0 translate-x-full transition ease-in-out duration-300 overflow-y-scroll">
+      <div class="head fixed px-4 flex w-full gap-4 items-center shadow">
+        <button type="button" id="back" class="px-4 flex justify-center items-center cursor-pointer h-8 w-8 border rounded-full">
+          <i for="back" class="fa-solid fa-chevron-left text-primary"></i>
         </button>
-        <h1 class="capitalize font-bold text-xl py-4">${data.title}</h1>
+        <h1 class="uppercase font-bold text-xl py-4">${data.title}</h1>
       </div>
+      <ul class="pt-16">
   `
 
-  data.list.forEach(type => {
-    result += `
-      <div class="flex p-4 w-full gap-4 items-center">
-        <input type="checkbox" name="${type}" id="${type}" class="mb-4 block bg-red-400 cursor-pointer">
+  data.list.forEach( (type, i) => {
+    if (i === 0) {
+      result += `
+      <li class="flex p-4 w-full gap-2 items-center">
+        <input type="radio" name="${data.type}" id="${type}" checked class="mx-4 block bg-red-400 cursor-pointer">
         <label for="${type}" class="font-semibold text-xl w-full pb-2 border-b-2 border-secondary cursor-pointer">${type}</label>
-      </div>`
+      </li>
+      `
+      return
+    }
+    result += `
+      <li class="flex p-4 w-full gap-2 items-center">
+        <input type="radio" name="${data.type}" id="${type}" class="mx-4 block bg-red-400 cursor-pointer">
+        <label for="${type}" class="font-semibold text-xl w-full pb-2 border-b-2 border-secondary cursor-pointer capitalize">${type}</label>
+      </li>
+      `
   })
 
-  result += `</div>`
+  result += `</ul></div>`
 
   return result
 }

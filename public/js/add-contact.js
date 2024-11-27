@@ -48,6 +48,7 @@ pluses.forEach(p => {
 })
 
 // Button Plus, min, back start
+
 main.addEventListener('click', ({target}) => {
 
   if (target.classList.contains('minus')) {
@@ -59,13 +60,17 @@ main.addEventListener('click', ({target}) => {
 
   if (target.classList.contains('detail')) {
     target.parentElement.nextElementSibling.classList.add('detail-active')
+    const [...children] = target.parentElement.nextElementSibling.lastChild.children
   }
-  if (target.classList.contains('back')) {
+  if (target.id === 'back') {
     target.parentElement.parentElement.classList.remove('detail-active')
   }
   if (target.classList.contains('fa-chevron-left')) {
     target.parentElement.parentElement.parentElement.classList.remove('detail-active')
   }
-  
+  if (target.hasAttribute('name')){
+    target.parentElement.parentElement.parentElement.previousElementSibling.children[1].innerHTML = target.id
+  }
+
 })
 // Button Plus, min, back End
