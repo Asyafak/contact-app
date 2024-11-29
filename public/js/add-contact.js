@@ -8,7 +8,7 @@ listInput.forEach(data => {
   main.appendChild(result)
 })
 
-// Button Plus and Minus Start
+// Button Plus create Minus Start
 const pluses = document.querySelectorAll('.plus')
 
 pluses.forEach(p => {
@@ -48,8 +48,8 @@ pluses.forEach(p => {
 })
 
 // Button Plus, min, back start
-
 main.addEventListener('click', ({target}) => {
+  const parents = document.querySelectorAll('.parent')
 
   if (target.classList.contains('minus')) {
     target.parentElement.parentElement.remove()
@@ -60,7 +60,6 @@ main.addEventListener('click', ({target}) => {
 
   if (target.classList.contains('detail')) {
     target.parentElement.nextElementSibling.classList.add('detail-active')
-    const [...children] = target.parentElement.nextElementSibling.lastChild.children
   }
   if (target.id === 'back') {
     target.parentElement.parentElement.classList.remove('detail-active')
@@ -69,8 +68,58 @@ main.addEventListener('click', ({target}) => {
     target.parentElement.parentElement.parentElement.classList.remove('detail-active')
   }
   if (target.hasAttribute('name')){
-    target.parentElement.parentElement.parentElement.previousElementSibling.children[1].innerHTML = target.id
+    target.parentElement.parentElement.parentElement.previousElementSibling.children[1].innerHTML = target.dataset.name
   }
+
+  parents.forEach( (parent, i) => {
+    if (parent.children[1] && i === 1 && !parent.children[1].firstElementChild.firstElementChild.hasAttribute('required')) {
+      parent.children[1].firstElementChild.firstElementChild.setAttribute('required', '')
+    }
+
+    if (parent.children.length > 1) {
+      if (parent.firstElementChild.firstElementChild.classList.contains('plus') && i === 0) {
+        parent.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.classList.add('hidden')
+      }
+      parent.firstElementChild.firstElementChild.classList.add('hidden')
+      parent.firstElementChild.children[1].classList.remove('hidden')
+    } else {
+      if (parent.firstElementChild.firstElementChild.classList.contains('plus') && i === 0) {
+        parent.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.classList.remove('hidden')
+      }
+      parent.firstElementChild.firstElementChild.classList.remove('hidden')
+      parent.firstElementChild.children[1].classList.add('hidden')
+    }
+
+  })
 
 })
 // Button Plus, min, back End
+
+const buttonSubmit = document.getElementById('button-submit')
+buttonSubmit.addEventListener('click', function() {
+  if (main.children[2].children.length === 1) {
+    main.parentElement.setAttribute('method', '')
+  
+    const newInput = document.createElement('div')
+    newInput.classList.add('w-full', 'flex')
+    
+    let content = ``
+  
+    const buttonType = main.children[2].firstElementChild.dataset.type
+
+    main.children[2].firstElementChild.firstElementChild.classList.add('hidden')
+    main.children[2].firstElementChild.children[1].classList.remove('hidden')
+    main.children[2].firstElementChild.children[1].setAttribute('required', '')
+  
+    const data = listInput.find( input => input.type === buttonType)
+    content += addDetail(data)
+    
+    content += addListDetail(data)
+  
+    newInput.innerHTML = content
+    main.children[2].appendChild(newInput)
+  } else {
+    main.parentElement.setAttribute('method', 'post')
+    buttonSubmit.setAttribute('type', 'submit')
+  }
+})

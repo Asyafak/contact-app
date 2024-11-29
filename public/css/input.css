@@ -38,3 +38,7 @@ body {
 .detail-active {
   @apply translate-x-0;
 }
+
+.plus-active {
+  @apply border-none cursor-default;
+}

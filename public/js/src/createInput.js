@@ -1,10 +1,11 @@
 const createInput = (type) => {
   const newInput = document.createElement('div')
-  newInput.classList.add('p-4', 'flex', 'gap-2', 'flex-wrap')
+  newInput.classList.add('parent', 'w-full', 'p-4', 'flex', 'gap-2', 'flex-wrap', 'justify-between')
 
   const contactInput = `
     <div data-type="${type}" class="flex w-full gap-4">
-      <button type="button" class="plus w-full border-b-2 border-secondary text-start text-secondary cursor-pointer">${type}</h1>
+      <button type="button" class="plus w-full border-b-2 border-secondary text-start text-secondary cursor-pointer transition duration-300">${type}</button>
+      <h1 class="hidden w-full border-b-0 border-secondary text-start text-secondary transition duration-300">${type}</h1>
       <button type="button" class="plus flex justify-center items-center h-8 w-8 border rounded-full cursor-pointer">
         <i class="fa-solid fa-plus text-green-500"></i>
       </button>
@@ -64,7 +65,7 @@ const addDetail = (data) => {
   return `
     <div class="flex w-full gap-4">
       <input type="text" placeholder="" class="w-full appearance-none focus:outline-none border-b-2 border-b-secondary focus:border-b-primary">
-      <button type="button" data-type="${data.type}" class="detail border-b-2 border-secondary px-4 cursor-pointer capitalize">${data.list[0]}</button>
+      <button type="button" data-type="${data.type}" class="detail border-b-2 border-secondary w-32 px-1 overflow-hidden cursor-pointer capitalize">${data.list[0]}</button>
       <button type="button" class="minus flex justify-center items-center cursor-pointer h-8 w-10 border rounded-full">
         <i class="fa-solid fa-minus text-red-500"></i>
       </button>
@@ -81,7 +82,7 @@ const addListDetail = (data) => {
         </button>
         <h1 class="uppercase font-bold text-xl py-4">${data.title}</h1>
       </div>
-      <ul class="pt-16">
+      <ul class="pt-16 pb-8">
   `
 
   data.list.forEach( (type, i) => {
@@ -89,17 +90,18 @@ const addListDetail = (data) => {
       result += `
       <li class="flex p-4 w-full gap-2 items-center">
         <input type="radio" name="${data.type}" id="${type}" checked class="mx-4 block bg-red-400 cursor-pointer">
-        <label for="${type}" class="font-semibold text-xl w-full pb-2 border-b-2 border-secondary cursor-pointer">${type}</label>
+        <label for="${type}" class="font-semibold text-xl w-full pb-2 border-b-2 border-secondary cursor-pointer capitalize">${type}</label>
       </li>
       `
       return
     }
+
     result += `
       <li class="flex p-4 w-full gap-2 items-center">
-        <input type="radio" name="${data.type}" id="${type}" class="mx-4 block bg-red-400 cursor-pointer">
-        <label for="${type}" class="font-semibold text-xl w-full pb-2 border-b-2 border-secondary cursor-pointer capitalize">${type}</label>
+        <input type="radio" data-name="${type}" name="${data.type}" id="${data.type}-${type}" class="mx-4 block bg-red-400 cursor-pointer">
+        <label for="${data.type}-${type}" class="font-semibold text-xl w-full pb-2 border-b-2 border-secondary cursor-pointer capitalize">${type}</label>
       </li>
-      `
+    `
   })
 
   result += `</ul></div>`

@@ -8,12 +8,9 @@
 </head>
 <body>
 
-    <% if (title === 'Add Contact') { %>
-        <%- include('save') %>
-    <% } else { %>
+    <% if (!title === 'Add Contact') { %>
         <%- include('nav') %>
     <% } %>
-
 
     <div class="container">
         <%- body %>
